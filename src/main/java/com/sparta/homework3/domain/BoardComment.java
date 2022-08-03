@@ -1,27 +1,29 @@
 package com.sparta.homework3.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class BoardComment extends TimeStamped {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long commentId;
+    @Setter
+    @ManyToOne(optional = false)
+    private Board board;
 
-    @Column(nullable = false)
-    private String username;
+    @Setter
+    @Column(nullable = false, length = 500)
+    private String comment;
 
-    @Column(nullable = false)
-    private String reply;
-
-    @Column(nullable = false)
-    private Long userId;
+    public BoardComment(Board board, String comment){
+        this.board = board;
+        this.comment = comment;
+    }
 }
