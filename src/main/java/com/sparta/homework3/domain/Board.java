@@ -1,30 +1,31 @@
 package com.sparta.homework3.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@NoArgsConstructor
 @Entity
 public class Board extends TimeStamped{
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
-    private String username;
-
-    @Column(nullable = false)
+    @Setter
+    @Column(nullable = false, length = 10000)
     private String content;
 
-    public Board(String title, String username,String content){
+    private Board(String title, String content){
         this.title = title;
-        this.username = username;
         this.content = content;
     }
 }
