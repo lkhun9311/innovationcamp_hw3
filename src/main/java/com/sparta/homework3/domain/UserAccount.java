@@ -1,30 +1,24 @@
 package com.sparta.homework3.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Setter
+
 @Getter
-@NoArgsConstructor
 @Entity
 public class UserAccount extends TimeStamped {
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Long id;
-
-    @Column(nullable = false)
+    @Column(length = 12)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 32)
     private String password;
+
+    protected UserAccount() {}
 
     public UserAccount(String username, String password){
         this.username = username;
         this.password = password;
     }
-
-
 }
